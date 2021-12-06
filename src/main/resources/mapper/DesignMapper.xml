@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dbhw.mapper.DesignMapper">
+    <resultMap id="SlaveDTO" type="com.example.dbhw.model.DTO.SlaveDTO">
+        <id property="id" column="id"/>
+        <result property="lossRate" column="lossRate"/>
+        <result property="count" column="count"/>
+        <association property="productDTO" column="slaveProduct" select="getProductById"/>
+    </resultMap>
+
+    <select id="getSlaveProducts" parameterType="com.example.dbhw.model.Product"
+            resultMap="SlaveDTO">
+        select *
+        from Design
+        where targetProduct = #{id}
+    </select>
+
+    <select id="getSlaveProduct" parameterType="com.example.dbhw.model.Product"
+            resultMap="SlaveDTO">
+        select *
+        from Design
+        where id = #{id}
+    </select>
+
+    <insert id="create" parameterType="com.example.dbhw.model.Design" useGeneratedKeys="true" keyProperty="id">
+        insert into Design(targetProduct, slaveProduct, lossRate, count)
+        values (#{targetProduct.id}, #{slaveProduct.id}, #{lossRate}, #{count})
+    </insert>
+
+    <update id="update" parameterType="com.example.dbhw.model.Design">
+        update Design
+        <set>
+            <if test="targetProduct.id gt 0">targetProduct = #{targetProduct.id},</if>
+            <if test="slaveProduct.id gt 0">slaveProduct = #{slaveProduct.id},</if>
+            <if test="lossRate gte 0">lossRate = #{lossRate},</if>
+            <if test="count gte 0 ">count = #{count},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete
+        from Design
+        where id = #{id}
+    </delete>
+
+    <select id="getById" parameterType="int" resultType="com.example.dbhw.model.Design">
+        select *
+        from Design
+        where id = #{id}
+    </select>
+
+    <select id="getByTargetAndSlaveId" parameterType="int" resultType="com.example.dbhw.model.Design">
+        select *
+        from Design
+        where targetProduct = #{targetId}
+          and slaveProduct = #{slaveId}
+    </select>
+
+    <select id="getAll" resultType="com.example.dbhw.model.Design">
+        select *
+        from Design
+    </select>
+
+    <select id="getDesignListByTargetId" parameterType="int" resultType="com.example.dbhw.model.Design">
+        select *
+        from Design
+        where targetProduct = #{targetId}
+    </select>
+
+    <delete id="deleteDesignsByTargetId" parameterType="int">
+        delete
+        from Design
+        where targetProduct = #{targetId}
+    </delete>
+
+    <select id="getProductById" parameterType="int" resultType="com.example.dbhw.model.DTO.ProductDTO">
+        select *
+        from Product
+        where id = #{id}
+    </select>
+</mapper>

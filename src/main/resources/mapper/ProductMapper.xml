@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dbhw.mapper.ProductMapper">
+
+    <insert id="create" parameterType="com.example.dbhw.model.Product" useGeneratedKeys="true" keyProperty="id">
+        insert into Product(company, name, standard, unit, price)
+        values (#{company.name}, #{name}, #{standard}, #{unit}, #{price})
+    </insert>
+
+    <update id="update" parameterType="com.example.dbhw.model.Product">
+        update Product
+        set name = #{name},
+            standard = #{standard},
+            unit = #{unit},
+            price = #{price},
+            company = #{company.name}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete
+        from Product
+        where id = #{id}
+    </delete>
+
+    <select id="getById" parameterType="int" resultType="com.example.dbhw.model.Product">
+        select *
+        from Product
+        where id = #{id}
+    </select>
+
+    <select id="getDTOById" parameterType="int" resultType="com.example.dbhw.model.DTO.ProductDTO">
+        select *
+        from Product
+        where id = #{id}
+    </select>
+
+    <select id="getAll" resultType="com.example.dbhw.model.Product">
+        select *
+        from Product
+    </select>
+
+    <select id="getByName" parameterType="String" resultType="com.example.dbhw.model.Product">
+        select *
+        from Product
+        where name = #{name}
+    </select>
+
+    <select id="getByCompany" parameterType="String" resultType="com.example.dbhw.model.Product">
+        select *
+        from Product
+        where company = #{company.name}
+    </select>
+</mapper>

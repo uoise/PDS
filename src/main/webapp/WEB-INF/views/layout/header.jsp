@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +25,20 @@
             <li><a href="/product">Product</a></li>
             <li><a href="/design">Design</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ul>
+        <c:choose>
+            <c:when test="${empty sessionScope.principal}">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/user/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> LogOut</a></li>
+                </ul>
+            </c:otherwise>
+        </c:choose>
+
     </div>
 </nav>

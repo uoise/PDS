@@ -10,7 +10,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table
 public class Product implements MyEntity<ProductDTO> {
 
     @Id

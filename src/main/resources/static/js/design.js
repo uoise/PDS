@@ -24,7 +24,7 @@ let design = {
                 alert("제품을 선택하세요.");
                 return;
             }
-            if (confirm("삭제하시겠습니끼?")) {
+            if (confirm("삭제하시겠습니까?")) {
                 this.deleteDesign(id);
             }
         });

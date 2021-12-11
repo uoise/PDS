@@ -18,12 +18,12 @@ public class Design implements MyEntity<DesignDTO> {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "targetProduct")
+    @JoinColumn(name = "targetProduct", nullable = false)
     @Setter(AccessLevel.NONE)
     private Product targetProduct;
 
     @ManyToOne
-    @JoinColumn(name = "slaveProduct")
+    @JoinColumn(name = "slaveProduct", nullable = false)
     @Setter(AccessLevel.NONE)
     private Product slaveProduct;
 
@@ -35,6 +35,11 @@ public class Design implements MyEntity<DesignDTO> {
     @ColumnDefault("1")
     private int count;
 
+    @ManyToOne
+    @JoinColumn(name = "createUser", nullable = false)
+
+    private User createUser;
+
     protected void setTargetProduct(int t){
         targetProduct = Product.builder()
                 .id(t)
@@ -44,6 +49,18 @@ public class Design implements MyEntity<DesignDTO> {
         slaveProduct = Product.builder()
                 .id(s)
                 .build();
+    }
+
+    public void setCreateUser(Object o) {
+        if (o instanceof String) {
+            createUser = User.builder()
+                    .username((String) o)
+                    .build();
+        } else if (o instanceof User) {
+            createUser = (User) o;
+        } else {
+            throw new IllegalArgumentException("User Mapping Fail");
+        }
     }
 
     @Override

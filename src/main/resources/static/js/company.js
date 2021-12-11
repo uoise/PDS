@@ -1,37 +1,55 @@
 let index = {
     init: function () {
-        $("#btn-save").on("click", () => {
-            this.save();
+        $("#btn-company-save").on("click", () => {
+            if (this.valid()) {
+                this.save();
+            }
         });
         $("#btn-update").on("click", () => {
-            this.update();
+            if (this.valid()) {
+                this.update();
+            }
         });
         $("#btn-delete").on("click", () => {
-            this.delete();
+            if (confirm("삭제하시겠습니까?")) {
+                this.delete();
+            }
         });
     },
-    save: function () {
-        let data = {
-            name: $("#name").toString(),
+    valid: function () {
+        let formData = {
+            name: $("#name").val(),
         };
 
+        if (formData.name == "") {
+            alert("이름을 입력하세요.");
+            document.getElementById("name").focus();
+            return false;
+        }
+        return true;
+    },
+
+    save: function () {
+        let formData = {
+            name: $("#name").val(),
+        };
         $.ajax({
             type: "POST",
             url: "/company",
-            data: JSON.stringify(data),
+            data: JSON.stringify(formData),
             contentType: "application/json; charset=utf8",
             dataType: "json"
-        }).done(function (resp) {
-            alert("회사생성 완료");
+        }).done(function () {
+            alert("회사 생성 완료");
             location.href = "/company"
         }).fail(function (error) {
-            alert("회사생성 실패");
+            alert(error.responseText);
         });
     },
 
     update: function () {
         let id = $("#id").val();
-        let data = {
+        let formData = {
             targetProductId: $("#targetProductId").val(),
             targetSlaveId: $("#targetSlaveId").val(),
             lossRate: $("#lossRate").val(),
@@ -40,8 +58,8 @@ let index = {
 
         $.ajax({
             type: "PUT",
-            url: "/company/"+id,
-            data: JSON.stringify(data),
+            url: "/company/" + id,
+            data: JSON.stringify(formData),
             contentType: "application/json; charset=utf8",
             dataType: "json"
         }).done(function (resp) {
@@ -51,14 +69,13 @@ let index = {
             alert("회사수정 실패");
         });
     },
-
     delete: function () {
-        let data = $("#id").val();
+        let id = $("#id").val();
 
         $.ajax({
             type: "DELETE",
             url: "/company",
-            data: JSON.stringify(data),
+            data: JSON.stringify(id),
             contentType: "application/json; charset=utf8",
             dataType: "json"
         }).done(function (resp) {

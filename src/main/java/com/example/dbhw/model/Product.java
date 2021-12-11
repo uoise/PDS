@@ -17,7 +17,7 @@ public class Product implements MyEntity<ProductDTO> {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "company")
+    @JoinColumn(name = "company", nullable = false)
     @Setter(AccessLevel.PROTECTED)
     private Company company;
 
@@ -30,19 +30,38 @@ public class Product implements MyEntity<ProductDTO> {
     @Column
     private String unit;
 
-    @Column
+    @Column(nullable = false)
     private int price;
 
-    protected void setCompany(String s){
+    @ManyToOne
+    @JoinColumn(name = "createUser", nullable = false)
+    @Setter(AccessLevel.NONE)
+    private User createUser;
+
+    protected void setCompany(String s) {
         company = Company.builder()
                 .name(s)
                 .build();
     }
 
+    public void setCreateUser(Object o) {
+        if (o instanceof String) {
+            createUser = User.builder()
+                    .username((String) o)
+                    .build();
+        } else if (o instanceof User) {
+            createUser = (User) o;
+        } else {
+            throw new IllegalArgumentException("User Mapping Fail");
+        }
+    }
+
     @Override
     public void DTOtoEntity(ProductDTO productDTO) {
-        if (productDTO.getCompany() == null || productDTO.getCompany().length() < 0) throw new IllegalArgumentException("ProductDTO Convert Fail : name is empty");
-        if (productDTO.getPrice() < 0) throw new IllegalArgumentException("ProductDTO Convert Fail : price must be over 0");
+        if (productDTO.getCompany() == null || productDTO.getCompany().length() < 0)
+            throw new IllegalArgumentException("ProductDTO Convert Fail : name is empty");
+        if (productDTO.getPrice() < 0)
+            throw new IllegalArgumentException("ProductDTO Convert Fail : price must be over 0");
         name = productDTO.getName();
         standard = productDTO.getStandard();
         unit = productDTO.getUnit();

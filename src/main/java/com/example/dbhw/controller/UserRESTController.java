@@ -15,7 +15,7 @@ public class UserRESTController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user/signup")
+    @PostMapping("/auth/joinProc")
     public ResponseEntity<String> signup(@RequestBody User user){
         userService.joinUser(user);
         return new ResponseEntity<>("회원가입 완료", HttpStatus.NO_CONTENT);

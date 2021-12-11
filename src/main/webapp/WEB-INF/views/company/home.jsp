@@ -4,7 +4,7 @@
 <div class="container">
     <h2>Company</h2>
     <p></p>
-    <button type="button" class="btn btn-primary" onclick="location.href='/company/insertForm'">Create</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='/company/insertform'">Create</button>
     <table class="table table-hover">
         <thead>
         <tr>

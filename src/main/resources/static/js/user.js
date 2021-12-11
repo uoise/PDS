@@ -38,7 +38,7 @@ let index = {
         };
         $.ajax({
             type: "POST",
-            url: "/user/signup",
+            url: "/auth/joinProc",
             data: JSON.stringify(formData),
             contentType: "application/json; charset=utf8",
             dataType: "json"

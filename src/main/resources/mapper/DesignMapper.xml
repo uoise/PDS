@@ -25,8 +25,8 @@
     </select>
 
     <insert id="create" parameterType="com.example.dbhw.model.Design" useGeneratedKeys="true" keyProperty="id">
-        insert into Design(targetProduct, slaveProduct, lossRate, count)
-        values (#{targetProduct.id}, #{slaveProduct.id}, #{lossRate}, #{count})
+        insert into Design(targetProduct, slaveProduct, lossRate, count, createUser)
+        values (#{targetProduct.id}, #{slaveProduct.id}, #{lossRate}, #{count}, #{createUser.username})
     </insert>
 
     <update id="update" parameterType="com.example.dbhw.model.Design">
@@ -36,6 +36,7 @@
             <if test="slaveProduct.id gt 0">slaveProduct = #{slaveProduct.id},</if>
             <if test="lossRate gte 0">lossRate = #{lossRate},</if>
             <if test="count gte 0 ">count = #{count},</if>
+            createUser = #{createUser.username}
         </set>
         where id = #{id}
     </update>

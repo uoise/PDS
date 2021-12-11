@@ -20,7 +20,7 @@ public class CompanyController {
         return "company/home";
     }
 
-    @GetMapping("/company/insert")
+    @GetMapping("/company/insertform")
     public String insertForm(){
         return "company/insertForm";
     }

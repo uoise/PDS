@@ -12,4 +12,5 @@ public class DesignDTO {
     private int slaveProduct;
     private int lossRate;
     private int count;
+    private String createUser;
 }

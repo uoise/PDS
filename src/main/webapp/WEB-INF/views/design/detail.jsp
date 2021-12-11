@@ -24,6 +24,11 @@
             <div class="panel-heading">Company</div>
             <div class="panel-body">${targetProduct.company.name}</div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">CreateUser</div>
+            <div class="panel-body">${targetProduct.createUser.username}</div>
+        </div>
+
     </div>
     <div class="col-sm-6">
         <h2>Slave Product</h2>
@@ -46,6 +51,10 @@
         <div class="panel panel-default">
             <div class="panel-heading">Company</div>
             <div class="panel-body">${slaveProduct.productDTO.company}</div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">CreateUser</div>
+            <div class="panel-body">${slaveProduct.productDTO.createUser}</div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">LossRate(%)</div>

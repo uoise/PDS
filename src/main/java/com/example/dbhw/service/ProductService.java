@@ -6,6 +6,7 @@ import com.example.dbhw.mapper.ProductMapper;
 import com.example.dbhw.model.DTO.DesignProductDTO;
 import com.example.dbhw.model.Product;
 import com.example.dbhw.model.DTO.ProductDTO;
+import com.example.dbhw.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,19 +26,21 @@ public class ProductService implements MyService<ProductDTO, Product> {
     private CompanyMapper companyMapper;
 
     @Transactional
-    public void create(ProductDTO productDTO) {
+    public void create(User user, ProductDTO productDTO) {
         if(companyMapper.getById(productDTO.getCompany()) == null) throw new IllegalArgumentException("Product Fail: Company doesnt exist");
         Product product = new Product();
         product.DTOtoEntity(productDTO);
+        product.setCreateUser(user);
         productMapper.create(product);
     } // 제품 자체의 생성
 
     @Transactional
-    public void update(int productId, ProductDTO productDTO) {
+    public void update(User user, int productId, ProductDTO productDTO) {
         if(companyMapper.getById(productDTO.getCompany()) == null) throw new IllegalArgumentException("Product Fail: Company doesnt exist");
         Product product = productMapper.getById(productId);
         if (product == null) throw new IllegalArgumentException("Product Update Fail: Product doesnt exist");
         product.DTOtoEntity(productDTO);
+        product.setCreateUser(user);
         productMapper.update(product);
     } // 제품 자체의 수정
 

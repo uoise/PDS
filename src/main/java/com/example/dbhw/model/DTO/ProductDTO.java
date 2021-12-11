@@ -14,4 +14,5 @@ public class ProductDTO {
     private String standard;
     private String unit;
     private int price;
+    private String createUser;
 }

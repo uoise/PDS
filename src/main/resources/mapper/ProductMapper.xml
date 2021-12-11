@@ -5,8 +5,8 @@
 <mapper namespace="com.example.dbhw.mapper.ProductMapper">
 
     <insert id="create" parameterType="com.example.dbhw.model.Product" useGeneratedKeys="true" keyProperty="id">
-        insert into Product(company, name, standard, unit, price)
-        values (#{company.name}, #{name}, #{standard}, #{unit}, #{price})
+        insert into Product(company, name, standard, unit, price, createUser)
+        values (#{company.name}, #{name}, #{standard}, #{unit}, #{price},#{createUser.username})
     </insert>
 
     <update id="update" parameterType="com.example.dbhw.model.Product">
@@ -15,7 +15,8 @@
             standard = #{standard},
             unit = #{unit},
             price = #{price},
-            company = #{company.name}
+            company = #{company.name},
+            createUser = #{createUser.username}
         where id = #{id}
     </update>
 

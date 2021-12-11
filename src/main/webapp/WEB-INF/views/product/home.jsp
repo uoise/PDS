@@ -14,6 +14,7 @@
             <th>Unit</th>
             <th>Price</th>
             <th>Comapny</th>
+            <th>Username</th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@
                 <td>${Product.unit}</td>
                 <td>${Product.price}</td>
                 <td>${Product.company.name}</td>
+                <td>${Product.createUser.username}</td>
             </tr>
         </c:forEach>
         </tbody>

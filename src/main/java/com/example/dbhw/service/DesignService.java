@@ -55,7 +55,6 @@ public class DesignService implements MyService<DesignDTO, Design> {
         Design design = new Design();
         design.DTOtoEntity(designDTO);
         design.setCreateUser(user);
-        System.out.println(design);
         designMapper.create(design);
     }
 
@@ -65,7 +64,6 @@ public class DesignService implements MyService<DesignDTO, Design> {
         Design design = designMapper.getById(id);
         design.DTOtoEntity(designDTO);
         design.setCreateUser(user);
-        System.out.println(design);
         designMapper.update(design);
     }
 

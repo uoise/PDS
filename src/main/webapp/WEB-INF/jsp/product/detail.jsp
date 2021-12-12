@@ -32,6 +32,10 @@
             <div class="panel-heading">Company</div>
             <div class="panel-body">${Detail.targetProduct.company}</div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">CreateUser</div>
+            <div class="panel-body">${Detail.targetProduct.createUser}</div>
+        </div>
     </div>
     <div class="col-sm-8">
         <h2>Designs</h2>

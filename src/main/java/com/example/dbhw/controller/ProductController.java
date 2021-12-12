@@ -20,14 +20,12 @@ public class ProductController {
     @GetMapping(value={"/product", ""})
     public String home(Model model){
         model.addAttribute("Products", productService.getAll());
-        System.out.println(model);
         return "product/home";
     }
 
     @GetMapping("/product/insertform")
     public String insertForm(Model model){
         model.addAttribute("Companys", companyService.getAll());
-        System.out.println(model);
         return "product/insertForm";
     }
 
@@ -35,7 +33,6 @@ public class ProductController {
     public String updateForm(@PathVariable int id, Model model){
         model.addAttribute("Product", productService.getById(id));
         model.addAttribute("Companys", companyService.getAll());
-        System.out.println(model);
         return "product/updateForm";
     }
 
@@ -43,7 +40,6 @@ public class ProductController {
     public String detail(@PathVariable int id, Model model){
         model.addAttribute("Detail", productService.getSlaveProducts(id));
         model.addAttribute("Products", productService.getAll());
-        System.out.println(model);
         return "product/detail";
     }
 }

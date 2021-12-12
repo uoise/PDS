@@ -20,14 +20,12 @@ public class DesignController {
     @GetMapping("/design")
     public String home(Model model){
         model.addAttribute("Designs", designService.getAll());
-        System.out.println(model);
         return "design/home";
     }
 
     @GetMapping("/design/{targetId}/insertform")
     public String insertForm(Model model, @PathVariable int targetId){
         model.addAttribute("targetProduct", productService.getById(targetId));
-        System.out.println(model);
         return "design/insertForm";
     }
 
@@ -35,7 +33,6 @@ public class DesignController {
     public String updateForm(@PathVariable int id, Model model){
         model.addAttribute("design_info", designService.getById(id));
         model.addAttribute("design", designService.getDesignWithProduct(id));
-        System.out.println(model);
         return "design/updateForm";
     }
 
@@ -44,7 +41,6 @@ public class DesignController {
         Design design = designService.getById(id);
         model.addAttribute("targetProduct", productService.getById(design.getTargetProduct().getId()));
         model.addAttribute("slaveProduct", designService.getDesignWithProduct(id));
-        System.out.println(model);
         return "design/detail";
     }
 

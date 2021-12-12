@@ -16,7 +16,6 @@ public class CompanyController {
     @GetMapping("/company")
     public String home(Model model){
         model.addAttribute("Companys", companyService.getAll());
-        System.out.println(model);
         return "company/home";
     }
 
@@ -27,7 +26,6 @@ public class CompanyController {
 
     @GetMapping("/company/{id}/updateForm")
     public String updateForm(@PathVariable String id, Model model){
-        model.addAttribute("Company", companyService.getById(id));
         return "company/updateForm";
     }
 
